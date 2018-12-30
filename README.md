@@ -11,7 +11,7 @@ All other functions are simply [forward exports](https://user-images.githubuserc
 
 # Usage
 Change the string `USER32.DLL` in your Age of Empires exe to `USER33.DLL`
-and drop the user33.dll from the release page into the same folder as your game exe.
+and drop the user33.dll from the (release page)[https://github.com/udf/aoe_keystate_fix/releases] into the same folder as your game exe.
 
 Note that you don't need a hex editor to find and change this string
 (Notepad++ works, regular Notepad might mess up the encoding and corrupt the exe)

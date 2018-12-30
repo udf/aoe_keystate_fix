@@ -1,12 +1,12 @@
 # What is this?
 A fix for the [scrolling bug](https://gaming.stackexchange.com/questions/20826/the-age-of-empires-ii-scrolling-bug) in Age of Empires.
 
-By using a proxy dll that modifies the return values of the
+It works by using a proxy dll that modifies the return values of the
 [GetKeyboardState](https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getkeyboardstate),
 [GetKeyState](https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getkeystate) and,
 [GetAsyncKeystate](https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getasynckeystate) functions when they are called.
 
-All other functions are simply forward exports (not sure if this is the right term) to the original functions from `user32.dll`.
+All other functions are simply [forward exports](https://user-images.githubusercontent.com/13610073/50548649-e3cc8e80-0c58-11e9-914d-b1316134120d.png) to the original functions from `user32.dll`.
 
 
 # Usage
@@ -16,7 +16,7 @@ and drop the user33.dll from the release page into the same folder as your game 
 Note that you don't need a hex editor to find and change this string
 (Notepad++ works, regular Notepad might mess up the encoding and corrupt the exe)
 
-You'll know if it's loaded when you start the game and get a message box like this:
+You'll know if it's loaded when you start the game and get a message box like this:  
 ![](https://user-images.githubusercontent.com/13610073/50548573-fbefde00-0c57-11e9-8976-26fac03a9f0b.png)
 
 
@@ -34,14 +34,15 @@ Age of Empires II HD (and likely other versions) simply check if the return valu
 This breaks when Windows or Wine uses the middle bits for internal stuff,
 the latter happens when switching workspaces or putting the game in the scratchpad in [i3wm](https://i3wm.org/).
 
-Credit goes to Steam user `Sulix` for discovering that the problem is with how the game handles the return value of the functions:
+Credit goes to Steam user `Sulix` for discovering that the problem is with how the game handles the return value of the functions:  
 ![](https://user-images.githubusercontent.com/13610073/50548589-335e8a80-0c58-11e9-80ca-448b82c00be8.png)
+
 [thread](https://steamcommunity.com/app/221380/discussions/2/622954302095447538/#c154645539343670235)
 
 Note that Sulix only patched the GetKeyboardState function, but the game calls all three of the functions in several places
 (which would explain why the tech tree still bugs with his fix):
 ![](https://user-images.githubusercontent.com/13610073/50548597-4bcea500-0c58-11e9-83d0-baaae6638834.png)
-![](https://user-images.githubusercontent.com/13610073/50548611-5b4dee00-0c58-11e9-8046-14ec72f41111.png)
+![](https://user-images.githubusercontent.com/13610073/50548664-1aa2a480-0c59-11e9-8b0b-af98867fd7a8.png)
 (screenshots from radare2)
 
 Instead of patching the calls in the exe as he outlines, this project patches the function exports to make the game's incorrect logic always work.  

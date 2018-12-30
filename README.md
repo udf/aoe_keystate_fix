@@ -35,14 +35,14 @@ This breaks when Windows or Wine uses the middle bits for internal stuff,
 the latter happens when switching workspaces or putting the game in the scratchpad in [i3wm](https://i3wm.org/).
 
 Credit goes to Steam user `Sulix` for discovering that the problem is with how the game handles the return value of the functions:  
-![](https://user-images.githubusercontent.com/13610073/50548589-335e8a80-0c58-11e9-80ca-448b82c00be8.png)
-
+![](https://user-images.githubusercontent.com/13610073/50548589-335e8a80-0c58-11e9-80ca-448b82c00be8.png)  
 [thread](https://steamcommunity.com/app/221380/discussions/2/622954302095447538/#c154645539343670235)
 
 Note that Sulix only patched the GetKeyboardState function, but the game calls all three of the functions in several places
 (which would explain why the tech tree still bugs with his fix):
 ![](https://user-images.githubusercontent.com/13610073/50548597-4bcea500-0c58-11e9-83d0-baaae6638834.png)
 ![](https://user-images.githubusercontent.com/13610073/50548664-1aa2a480-0c59-11e9-8b0b-af98867fd7a8.png)
+
 (screenshots from radare2)
 
 Instead of patching the calls in the exe as he outlines, this project patches the function exports to make the game's incorrect logic always work.  

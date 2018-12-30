@@ -41,8 +41,7 @@ Credit goes to Steam user `Sulix` for discovering that the problem is with how t
 Note that Sulix only patched the GetKeyboardState function, but the game calls all three of the functions in several places
 (which would explain why the tech tree still bugs with his fix):
 ![](https://user-images.githubusercontent.com/13610073/50548597-4bcea500-0c58-11e9-83d0-baaae6638834.png)
-![](https://user-images.githubusercontent.com/13610073/50548664-1aa2a480-0c59-11e9-8b0b-af98867fd7a8.png)
-
+![](https://user-images.githubusercontent.com/13610073/50548664-1aa2a480-0c59-11e9-8b0b-af98867fd7a8.png)  
 (screenshots from radare2)
 
 Instead of patching the calls in the exe as he outlines, this project patches the function exports to make the game's incorrect logic always work.  
